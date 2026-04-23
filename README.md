@@ -110,10 +110,11 @@ manager.complete_task(1)
 
 ## ⚠️ Важно
 
-<hr> <details> <summary>Подробнее о проекте</summary>
+<details>
+<summary>Подробнее о проекте</summary>
 
-Этот текст скрыт до нажатия.  
-<span style="color: green;">Зелёный текст через HTML</span>
+Этот текст скрыт до нажатия  
+<b>Жирный текст через HTML</b>
 
 </details>
 
