@@ -1,0 +1,51 @@
+@startuml
+left to right direction
+
+actor "Покупатель" as customer
+actor "Зарегистрированный покупатель" as regCustomer
+actor "Администратор" as admin
+actor "Платёжная система" as paymentSystem
+actor "Служба доставки" as deliveryService
+
+customer <|-- regCustomer
+
+rectangle "Интернет-магазин" {
+    usecase "Искать товары" as SearchProducts
+    usecase "Просматривать карточку товара" as ViewProduct
+    usecase "Добавлять товар в корзину" as AddToCart
+    usecase "Оформлять заказ" as Checkout
+    usecase "Авторизоваться" as Auth
+    usecase "Оплачивать заказ" as PayOrder
+    usecase "Получать уведомление об оплате" as PaymentNotification
+    usecase "Отслеживать заказ" as TrackOrder
+    usecase "Управлять каталогом" as ManageCatalog
+    usecase "Управлять заказами" as ManageOrders
+    usecase "Формировать накладную" as CreateInvoice
+}
+
+customer --> SearchProducts
+customer --> ViewProduct
+customer --> AddToCart
+customer --> Checkout
+
+regCustomer --> TrackOrder
+regCustomer --> PayOrder
+
+admin --> ManageCatalog
+admin --> ManageOrders
+admin --> CreateInvoice
+
+paymentSystem --> PayOrder
+paymentSystem --> PaymentNotification
+
+deliveryService --> TrackOrder
+deliveryService --> CreateInvoice
+
+Checkout <|-- AddToCart : <<include>>
+Checkout <|-- Auth : <<include>>
+PayOrder <|-- Checkout : <<include>>
+PaymentNotification <|-- PayOrder : <<extend>>
+TrackOrder <|-- CreateInvoice : <<include>>
+ManageOrders <|-- CreateInvoice : <<extend>>
+
+@enduml
